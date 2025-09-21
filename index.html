@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Salina</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6eb, #ffd6e0);
+      color: #6b4c4c;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #ffb6c1;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      padding: 0 10px;
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 90%;
+      max-width: 700px;
+      height: 400px;
+      margin: 20px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border: 3px solid rgba(255,192,203,0.5);
+      background: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slides {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* keeps full image inside container */
+      border-radius: 15px;
+      background: #fff0f5;
+    }
+
+    .fade {
+      animation: fade 0.8s;
+    }
+
+    @keyframes fade {
+      from {opacity: 0.4;}
+      to {opacity: 1;}
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    .next { right: 10px; }
+    .prev { left: 10px; }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .dot-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #ffb6c1;
+    }
+
+    .message-box {
+      max-width: 90%;
+      margin: 20px auto;
+      background: rgba(255, 182, 193, 0.2);
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 1rem;
+      line-height: 1.6;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      color: #6b4c4c;
+    }
+
+    footer {
+      margin: 20px 0;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      color: #b56576;
+      padding: 0 10px;
+    }
+
+    @media (min-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      .message-box { font-size: 1.2rem; padding: 20px; }
+      footer { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Dear, Salina <br> Happy Birthday</h1>
+
+  <div class="slideshow-container" id="slideshow">
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+  </div>
+
+  <div class="dot-container" id="dots"></div>
+
+  <div class="message-box">
+    <p>I made this on a special occasion just for you, for us to look at the beautiful memories we had together.<br>
+      Although we aren't together and may not be together at all, I wish things could change.<br>
+      The memories of us being together is something I will cherish forever.<br>
+      I made this just for you, so we can always have a place for our memories ❤️<br>
+      Ps. There are many things I wanna say but I will leave it for now and hope you have a wonderful life and birthday ahead.<br>
+      Ps. I will add pics more later on if we get together.
+    </p>
+  </div>
+
+  <footer>Made by Aaron for Salina</footer>
+
+  <script>
+    let slideIndex = 1;
+
+    // Put all pictures in the 'pictures' folder in your repo
+    const pictures = [
+      'pictures/pic1.jpg',
+      'pictures/pic2.jpg',
+      'pictures/pic3.jpg',
+      'pictures/pic4.jpg',
+      'pictures/pic5.jpg',
+      'pictures/pic6.jpg',
+      'pictures/pic7.jpg'
+    ];
+
+    const slideshowContainer = document.getElementById('slideshow');
+    const dotsContainer = document.getElementById('dots');
+
+    // Dynamically create slides and dots
+    pictures.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'slides fade';
+      slideshowContainer.appendChild(img);
+
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      dot.onclick = () => currentSlide(i + 1);
+      dotsContainer.appendChild(dot);
+    });
+
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      const slides = document.getElementsByClassName('slides');
+      const dots = document.getElementsByClassName('dot');
+
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = 'none';
+      for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(' active', '');
+
+      slides[slideIndex - 1].style.display = 'block';
+      dots[slideIndex - 1].className += ' active';
+    }
+  </script>
+
+</body>
+</html>
